@@ -1,9 +1,0 @@
-- hosts: all
-     tasks:
-       - name: Clonar o repositório do github
-          git:
-             repo: 'https://github.com/sqlite/sqlite.git'
-             dest: /home/lais_paiva/repos/
-             clone: 'yes'
-             update: 'yes'
-
