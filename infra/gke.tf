@@ -57,5 +57,6 @@ resource "google_container_node_pool" "lais-nodes-ref" {
       disable-legacy-endpoints = "true"
     }
   }
-
 }
+
+

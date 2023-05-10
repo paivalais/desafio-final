@@ -1,0 +1,25 @@
+- name: Fazer o deploy do NGINX
+  hosts: localhost
+  tasks:
+    - name: Adicionar o repositório no Cloud Shell
+      shell:
+        "helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx"
+    
+    - name: Atualizar o helm
+      shell:
+        "helm repo update"
+
+        #- name: Fazer o deploy do serviço NGINX
+        #shell:
+        #"helm install nginx-ingress ingress-nginx/ingress-nginx"
+    - name: Verificar o deploy
+      shell:
+        "kubectl get deployment nginx-ingress-ingress-nginx-controller"
+        
+    - name: Verificar o serviço
+      shell:    
+        "kubectl get service nginx-ingress-ingress-nginx-controller"
+
+    - name: Enviar o IP externo para uma variável
+      shell:
+        "export NGINX_INGRESS_IP=$(kubectl get service nginx-ingress-ingress-nginx-controller -ojson | jq -r '.status.loadBalancer.ingress[].ip')"
