@@ -50,7 +50,7 @@ resource "google_container_node_pool" "lais-nodes-ref" {
 
     #configuração das máquinas
     machine_type = "e2-medium"
-    disk_size_gb = 10
+    disk_size_gb = 100
     tags         = ["gke-node"]
 
     metadata = {

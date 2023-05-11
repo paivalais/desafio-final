@@ -20,5 +20,7 @@ resource "google_compute_router_nat" "nat" {
 		name = "lais-subpri-df"
 		source_ip_ranges_to_nat = ["ALL_IP_RANGES"]
 	}
-
+    depends_on = [
+      google_compute_firewall.lais-fwlpri-ref
+    ]
 }

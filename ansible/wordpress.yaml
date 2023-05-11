@@ -1,6 +1,9 @@
 - name: Fazendo o deploy do Wordpress
   hosts: localhost
   tasks:
+    - name: Entrar no Cluster
+      shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
+      
     - name: Criar um namespace
       shell: "kubectl apply -f namespace.yaml"
 

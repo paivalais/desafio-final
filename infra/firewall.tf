@@ -13,6 +13,10 @@ resource "google_compute_firewall" "lais-fwlpri-ref" {
   }
   source_ranges = [ "10.0.4.0/24" ] #IP da subnet pública
   target_tags = ["private-fwl"] //tag para adicionar na máquina privada
+
+  depends_on = [
+    google_compute_network.lais-vpc-ref
+  ]
 }
 
 
@@ -32,6 +36,10 @@ resource "google_compute_firewall" "lais-fwlpub-ref" {
 
     source_ranges = ["0.0.0.0/0"]
     target_tags = ["public-fwl"]
+
+    depends_on = [
+      google_compute_network.lais-vpc-ref
+    ]
 
 }
 
