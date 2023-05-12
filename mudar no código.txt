@@ -1,2 +1,1 @@
 * provider.tf --> mudar o nome do projeto
-* vms.tf --> ssh keys
