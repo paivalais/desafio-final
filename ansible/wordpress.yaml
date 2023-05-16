@@ -9,6 +9,6 @@
     
     - name: Instalar o wordpress
       shell: "helm install my-wordpress bitnami/wordpress --version 16.0.4 -n deploy-wordpress"
-    
+
     - name: Executar o hpa
       shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
