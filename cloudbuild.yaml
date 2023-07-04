@@ -25,7 +25,7 @@ steps:
   - '-c'
   - | 
         cd infra/
-        terraform plan
+        terraform plan 
 
 - id: 'tf apply'
   name: 'hashicorp/terraform:1.0.0'
