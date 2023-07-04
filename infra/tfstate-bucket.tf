@@ -1,6 +1,6 @@
 terraform {
  backend "gcs" {
-   bucket  = "pipeline-lais"
+   bucket  = "lais-tfstate-df"
    prefix  = "terraform/state"
  }
 }
