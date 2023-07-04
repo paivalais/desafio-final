@@ -18,7 +18,14 @@ steps:
         cd infra/
         terraform init
 
-
+- id: 'tf plan'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+        terraform plan
+      
 
 options:
   logging: CLOUD_LOGGING_ONLY
