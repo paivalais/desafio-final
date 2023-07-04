@@ -9,6 +9,32 @@ steps:
       echo "$BRANCH_NAME"
       echo "***********************"
 
+- id: 'tf init'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "infra/$BRANCH_NAME/" ]; then
+        cd infra/$BRANCH_NAME
+        terraform init
+      else
+        for dir in infra/*/
+        do 
+          cd ${dir}   
+          env=${dir%*/}
+          env=${env#*/}
+          echo ""
+          echo "*************** TERRAFORM INIT ******************"
+          echo "******* At environment: ${env} ********"
+          echo "*************************************************"
+          terraform init || exit 1
+          cd ../../
+        done
+      fi 
+
+
+
 options:
   logging: CLOUD_LOGGING_ONLY
 #lais
