@@ -1,62 +1,10 @@
 steps:
-
-  # Step 1: Install Terraform
-
-  - name: 'hashicorp/terraform:1.0.4'
-
-    entrypoint: 'bash'
-
-    args:
-
-      - '-c'
-
-      - |
-
-          apt-get update && apt-get install -y wget unzip
-
-          wget https://releases.hashicorp.com/terraform/1.0.4/terraform_1.0.4_linux_amd64.zip
-
-          unzip terraform_1.0.4_linux_amd64.zip
-
-          mv terraform /usr/local/bin/
-
- 
-
-  # Step 2: Authenticate using the current service account
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-
-    entrypoint: 'bash'
-
-    args:
-
-      - '-c'
-
-      - |
-
-          gcloud auth activate-service-account --key-file=$$GOOGLE_APPLICATION_CREDENTIALS
-
- 
-
-  # Step 3: Run Terraform apply
-
-  - name: 'hashicorp/terraform:1.0.4'
-
-    entrypoint: 'bash'
-
-    args:
-
-      - '-c'
-
-      - |
-
-          cd infra
-
-          terraform init
-
-          terraform apply -auto-approve
-
-options:
-  logging: CLOUD_LOGGING_ONLY
-#lais
- 
+- id: 'branch name'
+  name: 'alpine'
+  entrypoint: 'sh'  
+  args: 
+  - '-c'
+  - | 
+      echo "***********************"
+      echo "$BRANCH_NAME"
+      echo "***********************"
