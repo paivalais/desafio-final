@@ -1,0 +1,7 @@
+#Criando uma namespace
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: deploy-ingress
+  labels:
+    name: deploy-ingress

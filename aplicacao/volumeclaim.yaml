@@ -1,0 +1,12 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: volumeclaim
+  namespace: deploy-ingress
+spec:
+  accessModes:
+  - ReadWriteMany
+  storageClassName: filestore
+  resources:
+    requests:
+      storage: 50Gi

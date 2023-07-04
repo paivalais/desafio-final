@@ -1,0 +1,61 @@
+- name: Fazer o deploy das aplicações
+  hosts: localhost
+  tasks:
+      
+    #Cluster
+    - name: Entrar no Cluster
+      shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
+
+      
+    #Ingress-controller
+    - name: Criar a namespace deploy-ingress
+      shell: "kubectl apply -f namespace-ic.yaml"
+    
+    - name: Instalar o Ingress-Controller
+      shell: "helm install -f nginx-ingress/values.yaml my-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.17.1 -n deploy-ingress"
+    
+    #PVC
+    - name: Rodar o apply no arquivo filestore.yaml
+      shell: "kubectl apply -f filestore.yaml"
+    
+    - name: Rodar o apply no arquivo volumeclaim.yaml
+      shell: "kubectl apply -f volumeclaim.yaml"
+
+    #Wordpress
+    - name: Instalar o Wordpress
+      #shell: "helm install my-wordpress bitnami/wordpress --version 16.0.4 -n deploy-ingress"
+      shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
+      
+
+    - name: Mudar o serviço do Wordpress --> de LoadBalancer para ClusterIP
+      shell: kubectl patch svc my-wordpress -n deploy-ingress -p '{"spec":{"type":"ClusterIP"}}'
+    
+    - name: Executar o hpa
+      shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
+
+   #Grafana
+    - name: Instalar o Grafana
+      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-ingress"
+    
+    #Prometheus
+    - name: Instalar o Prometheus
+      shell: "helm install my-prometheus oci://registry-1.docker.io/bitnamicharts/kube-prometheus -n deploy-ingress"
+    
+    #Certificado
+    - name: Criar a namespace para o gerenciador do certificado
+      shell: "kubectl create ns cert-manager"
+    
+    - name: Instalar o certificado
+      shell: "helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.11.0 --set installCRDs=true"
+
+    - name: Rodar o apply no arquivo do certificado
+      shell: "kubectl apply -f clusterissuer-staging.yaml"
+    
+    #Monitoring
+    - name: Rodar o apply no arquivo de monitoring
+      shell: "kubectl apply -f monitoring-ingress-controller.yaml"
+    
+    
+
+
+    
