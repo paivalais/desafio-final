@@ -1,9 +1,0 @@
-#Criando uma namespace
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: deploy-wordpress
-  labels:
-    name: deploy-wordpress
-    
-

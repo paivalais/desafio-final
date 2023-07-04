@@ -1,5 +1,0 @@
-- Como conectar meu terminal linux com o do GCP:
-
-
-- Acessar o cluster:
-    gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram

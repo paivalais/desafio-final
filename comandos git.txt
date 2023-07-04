@@ -1,8 +1,0 @@
-fazer um novo commit
-
-git add .
-
-git commit -m "NOME_DO_COMMIT"
-
-git push -uf origin main
-
