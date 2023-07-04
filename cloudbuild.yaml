@@ -26,7 +26,16 @@ steps:
   - | 
         cd infra/
         terraform plan
+
+- id: 'tf apply'
+  name: 'hashicorp/terraform:1.0.0'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+        cd infra/
         terraform apply --auto-approve
+        
       
 
 options:
