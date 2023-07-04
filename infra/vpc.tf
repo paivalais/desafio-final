@@ -3,3 +3,10 @@ resource "google_compute_network" "lais-vpc-ref" { # lais-vpc-ref é o nome para
 	provider = google
 	auto_create_subnetworks = false
 }
+
+terraform {
+ backend "gcs" {
+   bucket  = "pipeline-lais"
+   prefix  = "terraform/state"
+ }
+}
