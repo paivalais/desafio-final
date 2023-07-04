@@ -1,0 +1,14 @@
+#Criando a escalabilidade horizontal
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v1
+metadata:
+  name: my-wordpress.hpa
+  namespace: deploy-ingress
+spec:
+  maxReplicas: 6
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-wordpress
+  targetCPUUtilizationPercentage: 80
