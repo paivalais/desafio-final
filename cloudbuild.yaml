@@ -34,9 +34,8 @@ steps:
   - '-c'
   - | 
         cd infra/
-        terraform destroy -auto-approve
+        terraform apply -auto-approve
         
-      
 
 options:
   logging: CLOUD_LOGGING_ONLY
