@@ -1,0 +1,44 @@
+- name: Fazer o DESTROY das aplicações
+  hosts: localhost
+  tasks:
+      
+    #Cluster
+    - name: Entrar no Cluster
+      shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
+    
+    #DESTROY nos arquivos de PVC
+    - name: Rodar o DELETE no arquivo filestore.yaml
+      shell: "kubectl delete -f filestore.yaml"
+      
+    #DESTROY Wordpress
+    - name: DESTROY Wordpress
+      shell: "helm delete my-wordpress -n deploy-ingress"
+      
+   #DESTROY Grafana
+    - name: DESTROY Grafana
+      shell: "helm delete my-grafana -n deploy-ingress"
+    
+    #DESTROY Prometheus
+    - name: DESTROY Prometheus
+      shell: "helm delete my-prometheus -n deploy-ingress"
+    
+    #Certificado   
+    - name: DESTROY certificado
+      shell: "helm delete cert-manager -n cert-manager"
+
+    - name: Rodar o DELETE no arquivo do certificado
+      shell: "kubectl delete -f clusterissuer-staging.yaml"
+    
+    - name: DESTROY namespace para o gerenciador do certificado
+      shell: "kubectl delete namespace cert-manager"
+    
+    #Monitoring
+    - name: Rodar o DELETE no arquivo de monitoring
+      shell: "kubectl delete -f monitoring-ingress-controller.yaml"
+    
+    #Ingress-controller
+    - name: Deletar a namespace deploy-ingress
+      shell: "kubectl delete namespace deploy-ingress"
+
+
+    

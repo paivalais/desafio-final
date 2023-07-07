@@ -43,10 +43,10 @@
     
     #Certificado
     - name: Criar a namespace para o gerenciador do certificado
-      shell: "kubectl create ns cert-manager"
+      shell: "kubectl apply -f namespace-cert.yaml"
     
     - name: Instalar o certificado
-      shell: "helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.11.0 --set installCRDs=true"
+      shell: "helm install cert-manager jetstack/cert-manager -n cert-manager --version v1.11.0 --set installCRDs=true"
 
     - name: Rodar o apply no arquivo do certificado
       shell: "kubectl apply -f clusterissuer-staging.yaml"
