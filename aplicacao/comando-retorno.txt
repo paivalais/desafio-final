@@ -1,1 +1,0 @@
-echo "Password: $(kubectl get secret my-grafana-admin --namespace deploy-ingress -o jsonpath="{.data.GF_SECURITY_ADMIN_PASSWORD}" | base64 -d)"
