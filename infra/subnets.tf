@@ -17,6 +17,7 @@ resource "google_compute_subnetwork" "lais-subpri-ref" { # lais-subpri-ref é o 
 	}
 }
 
+/*
 # Criando subnet pública
 resource "google_compute_subnetwork" "lais-subpub-ref" {
 
@@ -26,3 +27,5 @@ resource "google_compute_subnetwork" "lais-subpub-ref" {
 	network = google_compute_network.lais-vpc-ref.id
     
 }
+
+*/
