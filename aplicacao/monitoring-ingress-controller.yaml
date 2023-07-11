@@ -17,7 +17,6 @@ spec:
   tls:
     - hosts:
       - 'grafana.35.196.126.133.nip.io'
-      - 'prometheus.35.196.126.133.nip.io'
       - 'wordpress.335.196.126.133.nip.io'
       secretName: monitoring-cert
 
@@ -32,17 +31,6 @@ spec:
             name: my-grafana
             port:
               number: 3000
-
-  - host: prometheus.35.196.126.133.nip.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-prometheus-kube-prometh-prometheus 
-            port:
-              number: 9090
 
   - host: wordpress.35.196.126.133.nip.io
     http:
