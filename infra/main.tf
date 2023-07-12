@@ -1,7 +1,6 @@
 provider "google" {
 project = "ces-igniteprogram"
 region  = "us-east1" 
-#credentials = "credentials/ces-igniteprogram-43f54dbe7e8d.json"
 }
 
 locals {
