@@ -5,7 +5,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: lais.paiva@atos.net # IMPORTANT: Replace with a valid email from your organization
+    email: lais.paiva@atos.net 
     privateKeySecretRef:
       name: letsencrypt
     solvers:
