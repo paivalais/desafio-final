@@ -41,7 +41,7 @@ steps:
   args: ['pip', 'install', 'ansible']
 
 - id: 'rodar playbook'
-  name: 'gcr.io/ces-igniteprogram/ansible'
+  name: 'gcr.io/cloud-builders/ansible'
   args: ['ansible-playbook', 'aplicacao/aplicacoes.yaml']
 
 options:
