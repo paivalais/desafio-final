@@ -6,29 +6,19 @@
     - name: Entrar no Cluster
       shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
     
-    #DESTROY nos arquivos de PVC
-    - name: Rodar o DELETE no arquivo filestore.yaml
-      shell: "kubectl delete -f filestore.yaml"
-      
     #DESTROY Wordpress
-    - name: DESTROY Wordpress
-      shell: "helm delete my-wordpress -n deploy-ingress"
+   # - name: DESTROY Wordpress
+     # shell: "helm delete my-wordpress -n deploy-ingress"
       
    #DESTROY Grafana
-    - name: DESTROY Grafana
-      shell: "helm delete my-grafana -n deploy-ingress"
+   # - name: DESTROY Grafana
+     # shell: "helm delete my-grafana -n deploy-ingress"
     
     #DESTROY Prometheus
-    - name: DESTROY Prometheus
-      shell: "helm delete my-prometheus -n deploy-ingress"
+   # - name: DESTROY Prometheus
+     # shell: "helm delete my-prometheus -n deploy-ingress"
     
-    #Certificado   
-    - name: DESTROY certificado
-      shell: "helm delete cert-manager -n cert-manager"
-
-    - name: Rodar o DELETE no arquivo do certificado
-      shell: "kubectl delete -f clusterissuer-staging.yaml"
-    
+    #Certificado       
     - name: DESTROY namespace para o gerenciador do certificado
       shell: "kubectl delete namespace cert-manager"
     

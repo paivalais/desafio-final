@@ -35,14 +35,6 @@ steps:
   - | 
         cd infra/
         terraform apply -auto-approve
-        
-- id: 'instalar ansible'
-  name: 'gcr.io/cloud-builders/ansible'
-  args: ['pip', 'install', 'ansible']
-
-- id: 'rodar playbook'
-  name: 'gcr.io/cloud-builders/ansible'
-  args: ['ansible-playbook', 'aplicacao/aplicacoes.yaml']
 
 options:
   logging: CLOUD_LOGGING_ONLY
