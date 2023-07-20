@@ -23,7 +23,6 @@
 
     #Wordpress
     - name: Instalar o Wordpress
-      #shell: "helm install my-wordpress bitnami/wordpress --version 16.0.4 -n deploy-ingress"
       shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
       
 
@@ -34,8 +33,11 @@
       shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
 
    #Grafana
+    - name: Criar namespace my-grafana
+      shell: "kubectl apply -f namespace-gf.yaml"
+
     - name: Instalar o Grafana
-      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-ingress"
+      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-grafana"
     
     #Prometheus
     - name: Instalar o Prometheus
@@ -51,9 +53,13 @@
     - name: Rodar o apply no arquivo do certificado
       shell: "kubectl apply -f clusterissuer-staging.yaml"
     
-    #Monitoring
+    #Ingress Grafana
     - name: Rodar o apply no arquivo de monitoring
-      shell: "kubectl apply -f monitoring-ingress-controller.yaml"
+      shell: "kubectl apply -f ingress-grafana.yaml"
+
+    #Ingress Wordpress
+    - name: Rodar o apply no arquivo ingress-wordpress.yaml
+      shell: "kubectl apply -f ingress-wordpress.yaml"
     
     
 

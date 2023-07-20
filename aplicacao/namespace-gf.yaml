@@ -1,0 +1,7 @@
+#Criando uma namespace
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: deploy-grafana
+  labels:
+    name: deploy-grafana

@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: monitoring
-  namespace: deploy-ingress
+  namespace: deploy-grafana
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -10,7 +10,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
     cert-manager.io/cluster-issuer: letsencrypt-staging
     acme.cert-manager.io/http01-edit-in-place: "true"
-    nginx.org/client-max-body-size: "100m" #aumentar o tamanho de upload
+    nginx.org/client-max-body-size: "100m" 
     
 
 spec:
@@ -18,7 +18,6 @@ spec:
   tls:
     - hosts:
       - 'grafana.35.196.126.133.nip.io'
-      - 'wordpress.335.196.126.133.nip.io'
       secretName: monitoring-cert
 
   rules:
@@ -32,17 +31,6 @@ spec:
             name: my-grafana
             port:
               number: 3000
-
-  - host: wordpress.35.196.126.133.nip.io
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: my-wordpress
-            port:
-              number: 80
 
 
 
