@@ -6,7 +6,6 @@
     - name: Entrar no Cluster
       shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
 
-      
     #Ingress-controller
     - name: Criar a namespace deploy-ingress
       shell: "kubectl apply -f namespace-ic.yaml"
@@ -25,7 +24,6 @@
     - name: Instalar o Wordpress
       shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
       
-
     - name: Mudar o serviço do Wordpress --> de LoadBalancer para ClusterIP
       shell: kubectl patch svc my-wordpress -n deploy-ingress -p '{"spec":{"type":"ClusterIP"}}'
     
