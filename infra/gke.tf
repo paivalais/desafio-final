@@ -24,14 +24,14 @@ module "gke" {
   node_pools = [
     {
       name                      = "lais-node-pool-df"
-      machine_type              = "e2-medium"
+      machine_type              = "n1-standard-2"
       node_locations            = "us-east1-b,us-east1-c"
-      min_count                 = 2
+      min_count                 = 3
       max_count                 = 6
       local_ssd_count           = 0
       spot                      = false
       local_ssd_ephemeral_count = 0
-      disk_size_gb              = 10
+      disk_size_gb              = 30
       disk_type                 = "pd-standard"
       image_type                = "COS_CONTAINERD"
       enable_gcfs               = false
