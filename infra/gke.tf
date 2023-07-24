@@ -26,8 +26,8 @@ module "gke" {
       name                      = "lais-node-pool-df"
       machine_type              = "n1-standard-2"
       node_locations            = "us-east1-b,us-east1-c"
-      min_count                 = 3
-      max_count                 = 6
+      min_count                 = 1
+      max_count                 = 4
       local_ssd_count           = 0
       spot                      = false
       local_ssd_ephemeral_count = 0
