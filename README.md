@@ -1,4 +1,4 @@
-<h2 align="center"> Documentação</h2>
+<h2> Documentação</h2>
 
 ### Sumário
 - [Descrição do Projeto](https://github.com/paivalais/desafio-final/tree/main/Doc/descricao-desafio)
