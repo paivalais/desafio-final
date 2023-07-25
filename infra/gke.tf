@@ -27,7 +27,7 @@ module "gke" {
       machine_type              = "n1-standard-2"
       node_locations            = "us-east1-b,us-east1-c"
       min_count                 = 1
-      max_count                 = 4
+      max_count                 = 11
       local_ssd_count           = 0
       spot                      = false
       local_ssd_ephemeral_count = 0
@@ -40,7 +40,7 @@ module "gke" {
       auto_upgrade              = true
       service_account           = "sa-ignite-terraform-lais@ces-igniteprogram.iam.gserviceaccount.com"
       preemptible               = false
-      initial_node_count        = 2
+      initial_node_count        = 3
     },
   ]
 
