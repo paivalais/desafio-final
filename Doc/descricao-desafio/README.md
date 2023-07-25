@@ -5,13 +5,13 @@ Também fizemos um Workshop implementando um Kubernetes do Zero e fizemos o depl
 <br>
 &nbsp;&nbsp;&nbsp;
 
-🎯 Objetivo: Replataforma WordPress com provisionamento IaC.
+🎯 <b>Objetivo:</b> Replataforma WordPress com provisionamento IaC.
 
-☁️ Soluções: GCP, Azure, AWS, Kubernetes e WordPress.
+☁️ <b>Soluções:</b> GCP, Azure, AWS, Kubernetes e WordPress.
 
-🔧 Ferramentas: Terraform, Ansible e Helm.
+🔧 <b>Ferramentas:</b> Terraform, Ansible e Helm.
 
-✅ Entrega: WordPress rodando como "microservices" em Kubernetes, o provisionamento deve ser feito com Terraform e as configurações com Ansible e Helm, a arquitetura e implementação deve ser efetuada com boas práticas de cada provedor, a aplicação deve escalar horizontalmente.
+✅ <b>Entrega:</b> WordPress rodando como "microservices" em Kubernetes, o provisionamento deve ser feito com Terraform e as configurações com Ansible e Helm, a arquitetura e implementação deve ser efetuada com boas práticas de cada provedor, a aplicação deve escalar horizontalmente.
 
 <b>Modelo de Apresentação:</b>
 - PPT
