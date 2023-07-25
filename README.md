@@ -1,4 +1,6 @@
-# Documentação
+<h2 align="center">
+  Documentação
+</h2>
 
 ## Sumário
 - Descrição do Projeto
