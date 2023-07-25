@@ -40,7 +40,7 @@ module "gke" {
       auto_upgrade              = true
       service_account           = "sa-ignite-terraform-lais@ces-igniteprogram.iam.gserviceaccount.com"
       preemptible               = false
-      initial_node_count        = 3
+      initial_node_count        = 2
     },
   ]
 
