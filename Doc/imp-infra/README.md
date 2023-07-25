@@ -2,17 +2,20 @@
 
 A implementação da infraestrutura compõe os seguintes recursos: 
 <br></br>
+
 ☁️ <b>VPC</b>
-  ```terraform
-  resource "google_compute_network" "lais-vpc-ref" { 
+```terraform
+resource "google_compute_network" "lais-vpc-ref" { 
 	name = "lais-vpc-df" 
 	provider = google
 	auto_create_subnetworks = false
-  }
-   ```
-- Subnet privada
+}
+```
+<br></br>
+
+☁️ <b>Subnet privada</b>
   
-    ```terraform
+```terraform
   resource "google_compute_subnetwork" "lais-subpri-ref" {
 	name = "lais-subpri-df"
 	ip_cidr_range = "10.0.5.0/24"
@@ -29,24 +32,25 @@ A implementação da infraestrutura compõe os seguintes recursos:
 		range_name = "secondary-range-ip-pods"
 		ip_cidr_range = "10.101.0.0/16"
 	  }
-  }
-     ```
+}
+```
+<br></br>
 
-
-- Subenet pública
-  ```terraform
-  resource "google_compute_subnetwork" "lais-subpub-ref" {
+☁️ <b>Subnet pública</b>
+```terraform
+resource "google_compute_subnetwork" "lais-subpub-ref" {
 
 	name = "lais-subpub-df"
 	ip_cidr_range = "10.0.4.0/24"
 	region = "us-east1"
 	network = google_compute_network.lais-vpc-ref.id
-  }
+}
+```
+<br></br>
 
-     ```
-    
-- Router
-  ```terraform
+☁️ <b>Router</b> 
+
+```terraform
   resource "google_compute_router" "lais-router-ref" {
 	name = "lais-router-df"
 	network = google_compute_network.lais-vpc-ref.id
@@ -56,8 +60,10 @@ A implementação da infraestrutura compõe os seguintes recursos:
 	  }
   }
   ```
-- NAT
-  ```terraform
+<br></br>
+
+☁️ <b>NAT</b>
+```terraform
   resource "google_compute_router_nat" "nat" {
 	name = "lais-nat-terraform"
 	router = google_compute_router.lais-router-ref.name
@@ -73,10 +79,11 @@ A implementação da infraestrutura compõe os seguintes recursos:
 		google_compute_subnetwork.lais-subpri-ref
     ]
   }
-  ```
-  
-- Firewall
-  ```terraform
+```
+<br></br>
+
+☁️ <b>Firewall</b>
+```terraform
   #regra de firewall privado
   resource "google_compute_firewall" "lais-fwlpri-ref" {
   name = "lais-fwlpri-df"
@@ -119,12 +126,12 @@ A implementação da infraestrutura compõe os seguintes recursos:
     ]
 
   }
+```
+<br></br>
 
+☁️ <b>GKE</b>
 
-  ```
-
-- GKE
-  ```terraform
+```terraform
   module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster-update-variant"
   project_id                 = "ces-igniteprogram"
@@ -178,12 +185,14 @@ A implementação da infraestrutura compõe os seguintes recursos:
     ]
     }
   }
-  ```
+```
 
 Além disso, contém um arquivo de configuração nomeado “main.tf”, que consiste em informar qual é o provedor utilizado, em qual projeto a infraestrutura será implementada, a região, e os ranges de IP do master, pods e services; e o arquivo "tfstate-bucket.tf", cuja função é armazenar o estado do Terraform (tfstate).
 
-- main.tf
-  ```terraform
+<br></br>
+
+☁️ <b>main.tf</b>
+```terraform
   provider "google" {
   project = "ces-igniteprogram"
   region  = "us-east1" 
@@ -197,8 +206,10 @@ Além disso, contém um arquivo de configuração nomeado “main.tf”, que con
   cluster_services_ip_cidr_range = "10.101.0.0/16"
   }
 	
-  ```
-- tfstate-bucket.tf
+```
+<br></br>
+
+☁️ <b>tfstate-bucket.tf</b>
 ```terraform
 terraform {
  backend "gcs" {
