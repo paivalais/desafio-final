@@ -1,0 +1,38 @@
+persistence:
+  enabled: true
+  existingClaim: "volumeclaim"
+ 
+metrics:
+  enabled: false
+
+  livenessProbe:
+    enabled: false
+    initialDelaySeconds: 90
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+
+  readinessProbe:
+    enabled: false
+    initialDelaySeconds: 90
+    periodSeconds: 10
+    timeoutSeconds: 3
+    failureThreshold: 3
+    successThreshold: 1
+
+  startupProbe:
+    enabled: false
+    initialDelaySeconds: 90
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 15
+    successThreshold: 1
+
+service:
+  type: LoadBalancer
+  ports:
+    http: 80
+    https: 443
+
+replicaCount: 3
