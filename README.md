@@ -1,6 +1,6 @@
-# Documentação
+<h2 align="center"> Documentação</h2>
 
-## Sumário
+### Sumário
 - Descrição do Projeto
 - Pipeline com Cloud Build
 - Arquitetura
