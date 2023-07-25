@@ -31,11 +31,11 @@
       shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
 
    #Grafana
-    - name: Criar namespace my-grafana
-      shell: "kubectl apply -f namespace-gf.yaml"
+    #- name: Criar namespace my-grafana
+      #shell: "kubectl apply -f namespace-gf.yaml"
 
     - name: Instalar o Grafana
-      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-grafana"
+      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-ingress"
     
     #Prometheus
     - name: Instalar o Prometheus
