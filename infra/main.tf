@@ -10,15 +10,3 @@ locals {
   cluster_pods_ip_cidr_range     = "10.100.0.0/16"
   cluster_services_ip_cidr_range = "10.101.0.0/16"
 }
-
-
-
-
-
-
-
-
-
-
-
-
