@@ -24,8 +24,8 @@
     - name: Instalar o Wordpress
       shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
       
-    - name: Mudar o serviço do Wordpress --> de LoadBalancer para ClusterIP
-      shell: kubectl patch svc my-wordpress -n deploy-ingress -p '{"spec":{"type":"ClusterIP"}}'
+    #- name: Mudar o serviço do Wordpress --> de LoadBalancer para ClusterIP
+      #shell: kubectl patch svc my-wordpress -n deploy-ingress -p '{"spec":{"type":"ClusterIP"}}'
     
     - name: Executar o hpa
       shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"

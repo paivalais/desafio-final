@@ -8,7 +8,7 @@ module "gke" {
   subnetwork                 = "lais-subpri-df"
   ip_range_pods              = "secondary-range-ip-pods"
   ip_range_services          = "secondary-range-ip-services"
-  http_load_balancing        = false
+  http_load_balancing        = true 
   network_policy             = false
   horizontal_pod_autoscaling = true
   filestore_csi_driver       = true
@@ -27,7 +27,7 @@ module "gke" {
       machine_type              = "n1-standard-2"
       node_locations            = "us-east1-b,us-east1-c"
       min_count                 = 1
-      max_count                 = 11
+      max_count                 = 4
       local_ssd_count           = 0
       spot                      = false
       local_ssd_ephemeral_count = 0
@@ -50,40 +50,4 @@ module "gke" {
       "https://www.googleapis.com/auth/monitoring",
     ]
   }
-
-/*  node_pools_labels = {
-    all = {}
-
-    default-node-pool = {
-      default-node-pool = false
-    }
-  }
-
-  node_pools_metadata = {
-    all = {}
-
-    default-node-pool = {
-      node-pool-metadata-custom-value = "my-node-pool"
-    }
-  }
-
-  node_pools_taints = {
-    all = []
-
-    default-node-pool = [
-      {
-        key    = ""
-        value  = false
-        effect = ""
-      },
-    ]
-  }
-
-  node_pools_tags = {
-    all = []
-
-    default-node-pool = [
-      "",
-    ]
-  } */
 }

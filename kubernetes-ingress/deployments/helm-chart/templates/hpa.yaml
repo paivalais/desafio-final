@@ -6,9 +6,9 @@ metadata:
   namespace: deploy-ingress
 spec:
   maxReplicas: 6
-  minReplicas: 3
+  minReplicas: 1
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
     name: my-wordpress
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 20
