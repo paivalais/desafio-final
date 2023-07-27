@@ -25,7 +25,8 @@ module "gke" {
     {
       name                      = "lais-node-pool-df"
       machine_type              = "n1-standard-2"
-      node_locations            = "us-east1-b,us-east1-c"
+      node_locations            = "us-east1-b"#,us-east1-c"
+      initial_node_count        = 1
       min_count                 = 1
       max_count                 = 4
       local_ssd_count           = 0
@@ -40,7 +41,7 @@ module "gke" {
       auto_upgrade              = true
       service_account           = "sa-ignite-terraform-lais@ces-igniteprogram.iam.gserviceaccount.com"
       preemptible               = false
-      initial_node_count        = 3
+      
     },
   ]
 
