@@ -1,7 +1,7 @@
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster-update-variant"
   project_id                 = "ces-igniteprogram"
-  name                       = "lais-clustergke-df"
+  name                       = "lais-clustergke-df-teste"
   region                     = "us-east1"
   zones                      = ["us-east1-b", "us-east1-c", "us-east1-d"]
   network                    = "lais-vpc-df"
@@ -25,9 +25,8 @@ module "gke" {
     {
       name                      = "lais-node-pool-df"
       machine_type              = "n1-standard-2"
-      node_locations            = "us-east1-b"#,us-east1-c"
+      node_locations            = "us-east1-b,us-east1-c"
       initial_node_count        = 1
-      #min_count                 = 1
       max_count                 = 4
       local_ssd_count           = 0
       spot                      = false
