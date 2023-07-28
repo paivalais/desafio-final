@@ -1,7 +1,7 @@
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster-update-variant"
   project_id                 = "ces-igniteprogram"
-  name                       = "lais-clustergke-df"
+  name                       = "lais-clustergke-df-2" ####
   region                     = "us-east1"
   zones                      = ["us-east1-b", "us-east1-c", "us-east1-d"]
   network                    = "lais-vpc-df"

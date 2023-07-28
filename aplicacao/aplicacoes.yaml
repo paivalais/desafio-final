@@ -4,7 +4,7 @@
       
     #Cluster
     - name: Entrar no Cluster
-      shell: "gcloud container clusters get-credentials lais-clustergke-df --region us-east1 --project ces-igniteprogram"
+      shell: "gcloud container clusters get-credentials lais-clustergke-df-2 --region us-east1 --project ces-igniteprogram"
 
     #Ingress-controller
     - name: Criar a namespace deploy-ingress
