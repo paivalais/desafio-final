@@ -481,8 +481,8 @@ readinessProbe:
     ##   value: https
     ##
     httpHeaders: []
-  initialDelaySeconds: 30
-  periodSeconds: 10
+  initialDelaySeconds: 300
+  periodSeconds: 30
   timeoutSeconds: 5
   failureThreshold: 6
   successThreshold: 1
@@ -900,8 +900,8 @@ metrics:
   ##
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 5
-    periodSeconds: 10
+    initialDelaySeconds: 300
+    periodSeconds: 30
     timeoutSeconds: 3
     failureThreshold: 3
     successThreshold: 1

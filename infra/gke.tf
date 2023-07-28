@@ -1,7 +1,7 @@
 module "gke" {
   source                     = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster-update-variant"
   project_id                 = "ces-igniteprogram"
-  name                       = "lais-clustergke-df-2" ####
+  name                       = "lais-clustergke-df-1" ####
   region                     = "us-east1"
   zones                      = ["us-east1-b", "us-east1-c", "us-east1-d"]
   network                    = "lais-vpc-df"
@@ -32,12 +32,9 @@ module "gke" {
       max_unavailable           = 1 ##
       local_ssd_count           = 0
       spot                      = false
-      # local_ssd_ephemeral_count = 0
       disk_size_gb              = 30
       disk_type                 = "pd-standard"
       image_type                = "COS_CONTAINERD"
-      #enable_gcfs               = false
-      #enable_gvnic              = false
       autoscaling               = true ###
       auto_repair               = true
       auto_upgrade              = true
