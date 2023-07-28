@@ -1,0 +1,316 @@
+
+
+clusterDomain: cluster.local
+
+diagnosticMode:
+  enabled: false
+  command:
+    - sleep
+  args:
+    - infinity
+
+image:
+  registry: docker.io
+  repository: bitnami/wordpress
+  tag: 6.2.2-debian-11-r21
+  pullPolicy: IfNotPresent
+  debug: false
+
+
+wordpressUsername: user
+wordpressPassword: ""
+existingSecret: ""
+wordpressEmail: user@example.com
+wordpressFirstName: FirstName
+wordpressLastName: LastName
+wordpressBlogName: WELCOME!
+wordpressTablePrefix: wp_
+wordpressScheme: http
+wordpressSkipInstall: false
+wordpressConfigureCache: false
+
+wordpressPlugins: none
+allowEmptyPassword: true
+allowOverrideNone: false
+overrideDatabaseSettings: false
+htaccessPersistenceEnabled: false
+
+multisite:
+  enable: false
+  host: ""
+  networkType: subdomain
+  enableNipIoRedirect: false
+
+
+replicaCount: 1
+
+updateStrategy:
+  type: RollingUpdate
+
+hostAliases:
+  - ip: "127.0.0.1"
+    hostnames:
+      - "status.localhost"
+
+podAntiAffinityPreset: soft
+
+
+resources:
+  limits: {}
+  requests:
+    memory: 512Mi
+    cpu: 300m
+
+containerPorts:
+  http: 8080
+  https: 8443
+
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 1001
+  seccompProfile:
+    type: "RuntimeDefault"
+
+containerSecurityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: false
+  capabilities:
+    drop: ["ALL"]
+
+livenessProbe:
+  enabled: true
+  httpGet:
+    path: /wp-admin/install.php
+    port: '{{ .Values.wordpressScheme }}'
+    scheme: '{{ .Values.wordpressScheme | upper }}'
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+readinessProbe:
+  enabled: true
+  httpGet:
+    path: /wp-login.php
+    port: '{{ .Values.wordpressScheme }}'
+    scheme: '{{ .Values.wordpressScheme | upper }}'
+  initialDelaySeconds: 300
+  periodSeconds: 30
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+startupProbe:
+  enabled: false
+  httpGet:
+    path: /wp-login.php
+    port: '{{ .Values.wordpressScheme }}'
+    scheme: '{{ .Values.wordpressScheme | upper }}'
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+
+  type: ClusterIP
+  ports:
+    http: 80
+    https: 443
+  httpsTargetPort: https
+ 
+  sessionAffinity: None
+  
+  externalTrafficPolicy: Cluster
+  
+ingress:
+  enabled: false
+  pathType: ImplementationSpecific
+  hostname: wordpress.local
+  path: /
+  tls: false
+  tlsWwwPrefix: false
+  selfSigned: false
+  
+persistence:
+  enabled: true
+  storageClass: "filestore"
+  accessModes:
+    - ReadWriteMany
+  accessMode: ReadWriteMany
+  size: 30Gi
+  existingClaim: "volumeclaim"
+
+volumePermissions:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/bitnami-shell
+    tag: 11-debian-11-r130
+    digest: ""
+    pullPolicy: IfNotPresent
+
+  resources:
+    limits: {}
+    requests: {}
+  containerSecurityContext:
+    runAsUser: 0
+
+
+serviceAccount:
+  create: false
+  name: ""
+  automountServiceAccountToken: true
+  
+pdb:
+  create: false
+  minAvailable: 1
+  maxUnavailable: ""
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 11
+  targetCPU: 50
+  targetMemory: 50
+
+metrics:
+  enabled: false
+  image:
+    registry: docker.io
+    repository: bitnami/apache-exporter
+    tag: 0.13.4-debian-11-r10
+    digest: ""
+    pullPolicy: IfNotPresent
+  containerPorts:
+    metrics: 9117
+  
+
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 15
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+    successThreshold: 1
+  
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 300
+    periodSeconds: 30
+    timeoutSeconds: 3
+    failureThreshold: 3
+    successThreshold: 1
+  
+  startupProbe:
+    enabled: false
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 15
+    successThreshold: 1
+  
+  resources:
+    limits: {}
+    requests: {}
+
+  service:
+    ports:
+      metrics: 9150
+    annotations:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "{{ .Values.metrics.containerPorts.metrics }}"
+  serviceMonitor:
+    enabled: false
+    
+networkPolicy:
+  enabled: false
+  metrics:
+    enabled: false
+    
+  ingress:
+    enabled: false
+    podSelector: {}
+    namespaceSelector: {}
+  ingressRules:
+    backendOnlyAccessibleByFrontend: false
+    accessOnlyFrom:
+      enabled: false
+     
+mariadb:
+  enabled: true
+  architecture: standalone
+  auth:
+    rootPassword: ""
+    database: bitnami_wordpress
+    username: bn_wordpress
+    password: ""
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      accessModes:
+        - ReadWriteOnce
+      size: 8Gi
+      
+externalDatabase:
+  ## @param externalDatabase.host External Database server host
+  ##
+  host: localhost
+  ## @param externalDatabase.port External Database server port
+  ##
+  port: 3306
+  ## @param externalDatabase.user External Database username
+  ##
+  user: bn_wordpress
+  ## @param externalDatabase.password External Database user password
+  ##
+  password: ""
+  ## @param externalDatabase.database External Database database name
+  ##
+  database: bitnami_wordpress
+  ## @param externalDatabase.existingSecret The name of an existing secret with database credentials. Evaluated as a template
+  ## NOTE: Must contain key `mariadb-password`
+  ## NOTE: When it's set, the `externalDatabase.password` parameter is ignored
+  ##
+  existingSecret: ""
+## Memcached chart configuration
+## ref: https://github.com/bitnami/charts/blob/main/bitnami/memcached/values.yaml
+##
+memcached:
+  ## @param memcached.enabled Deploy a Memcached server for caching database queries
+  ##
+  enabled: false
+  ## Authentication parameters
+  ## ref: https://github.com/bitnami/containers/tree/main/bitnami/memcached#creating-the-memcached-admin-user
+  ##
+  auth:
+    ## @param memcached.auth.enabled Enable Memcached authentication
+    ##
+    enabled: false
+    ## @param memcached.auth.username Memcached admin user
+    ##
+    username: ""
+    ## @param memcached.auth.password Memcached admin password
+    ##
+    password: ""
+  ## Service parameters
+  ##
+  service:
+    ## @param memcached.service.port Memcached service port
+    ##
+    port: 11211
+## External Memcached Configuration
+## All of these values are only used if `memcached.enabled=false`
+##
+externalCache:
+  ## @param externalCache.host External cache server host
+  ##
+  host: localhost
+  ## @param externalCache.port External cache server port
+  ##
+  port: 11211
