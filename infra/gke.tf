@@ -28,7 +28,7 @@ module "gke" {
       machine_type              = "n1-standard-2"
       node_locations            = "us-east1-b,us-east1-c,us-east1-d" ###
       min_count                 = 1
-      max_count                 = 4
+      max_count                 = 8
       max_surge                 = 2 ##
       max_unavailable           = 1 ##
       local_ssd_count           = 0

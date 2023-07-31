@@ -45,8 +45,8 @@
     - name: Instalar o Wordpress
       shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
     
-    - name: Executar o hpa
-      shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
+    #- name: Executar o hpa
+     # shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
     
     #Ingress Grafana
     - name: Rodar o apply no arquivo de monitoring
