@@ -262,7 +262,7 @@ multisite:
 ## @param replicaCount Number of WordPress replicas to deploy
 ## NOTE: ReadWriteMany PVC(s) are required if replicaCount > 1
 ##
-replicaCount: 1
+replicaCount: 2
 ## @param updateStrategy.type WordPress deployment strategy type
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
 ## NOTE: Set it to `Recreate` if you use a PV that cannot be mounted on multiple pods
@@ -452,7 +452,7 @@ livenessProbe:
     ##   value: https
     ##
     httpHeaders: []
-  initialDelaySeconds: 120
+  initialDelaySeconds: 300
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
@@ -834,8 +834,8 @@ pdb:
 ##
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 11
+  minReplicas: 2
+  maxReplicas: 6
   targetCPU: 50
   targetMemory: 50
 
@@ -847,7 +847,7 @@ autoscaling:
 metrics:
   ## @param metrics.enabled Start a sidecar prometheus exporter to expose metrics
   ##
-  enabled: false
+  enabled: true
   ## Bitnami Apache exporter image
   ## ref: https://hub.docker.com/r/bitnami/apache-exporter/tags/
   ## @param metrics.image.registry Apache exporter image registry
@@ -886,7 +886,7 @@ metrics:
   ##
   livenessProbe:
     enabled: true
-    initialDelaySeconds: 120
+    initialDelaySeconds: 15 # SIDECAR PROMETHEUS
     periodSeconds: 10
     timeoutSeconds: 5
     failureThreshold: 3
@@ -900,8 +900,8 @@ metrics:
   ##
   readinessProbe:
     enabled: true
-    initialDelaySeconds: 300
-    periodSeconds: 30
+    initialDelaySeconds: 5 #PROMETHEUS
+    periodSeconds: 10
     timeoutSeconds: 3
     failureThreshold: 3
     successThreshold: 1
