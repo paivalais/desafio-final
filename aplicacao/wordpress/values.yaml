@@ -1,16 +1,3 @@
-# Copyright VMware, Inc.
-# SPDX-License-Identifier: APACHE-2.0
-
-## @section Global parameters
-## Global Docker image parameters
-## Please, note that this will override the image parameters, including dependencies, configured to use the global value
-## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass
-##
-
-## @param global.imageRegistry Global Docker image registry
-## @param global.imagePullSecrets Global Docker registry secret names as an array
-## @param global.storageClass Global StorageClass for Persistent Volume(s)
-##
 global:
   imageRegistry: ""
   ## E.g.
@@ -20,11 +7,6 @@ global:
   imagePullSecrets: []
   storageClass: ""
 
-## @section Common parameters
-##
-
-## @param kubeVersion Override Kubernetes version
-##
 kubeVersion: ""
 ## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)
 ##
@@ -60,19 +42,7 @@ diagnosticMode:
   args:
     - infinity
 
-## @section WordPress Image parameters
-##
 
-## Bitnami WordPress image
-## ref: https://hub.docker.com/r/bitnami/wordpress/tags/
-## @param image.registry WordPress image registry
-## @param image.repository WordPress image repository
-## @param image.tag WordPress image tag (immutable tags are recommended)
-## @param image.digest WordPress image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag
-## @param image.pullPolicy WordPress image pull policy
-## @param image.pullSecrets WordPress image pull secrets
-## @param image.debug Specify if debug values should be set
-##
 image:
   registry: docker.io
   repository: bitnami/wordpress
@@ -380,7 +350,10 @@ tolerations: []
 ## @param resources.requests.cpu The requested cpu for the WordPress containers
 ##
 resources:
-  limits: {}
+  limits: 
+    memory: 512Mi
+    cpu: 350m
+
   requests:
     memory: 512Mi
     cpu: 300m

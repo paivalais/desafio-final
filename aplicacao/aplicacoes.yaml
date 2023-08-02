@@ -21,11 +21,11 @@
       shell: "kubectl apply -f volumeclaim.yaml"
 
    #Grafana
-    #- name: Criar namespace my-grafana
-      #shell: "kubectl apply -f namespace-gf.yaml"
+    - name: Criar namespace my-grafana
+      shell: "kubectl apply -f namespace-gf.yaml"
 
     - name: Instalar o Grafana
-      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-ingress"
+      shell: "helm install my-grafana oci://registry-1.docker.io/bitnamicharts/grafana -n deploy-grafana"
     
     #Prometheus
     - name: Instalar o Prometheus
