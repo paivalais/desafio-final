@@ -810,7 +810,13 @@ autoscaling:
   minReplicas: 2
   maxReplicas: 6
   targetCPU: 50
-  targetMemory: 50
+  targetMemory: 20
+
+
+
+
+
+  
 
 ## @section Metrics Parameters
 ##
