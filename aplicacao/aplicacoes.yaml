@@ -39,14 +39,15 @@
       shell: "helm install cert-manager jetstack/cert-manager -n cert-manager --version v1.11.0 --set installCRDs=true"
 
     - name: Rodar o apply no arquivo do certificado
-      shell: "kubectl apply -f clusterissuer-staging.yaml"
+      shell: "kubectl apply -f clusterissuer.yaml"
 
     #Wordpress
     - name: Instalar o Wordpress
       shell: "helm install -f wordpress/values.yaml my-wordpress oci://registry-1.docker.io/bitnamicharts/wordpress -n deploy-ingress"
     
-    #- name: Executar o hpa
-     # shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
+    - name: Executar o hpa
+      shell: "kubectl apply -f hpa.yaml"
+      #shell: "kubectl apply -f ../kubernetes-ingress/deployments/helm-chart/templates/hpa.yaml"
     
     #Ingress Grafana
     - name: Rodar o apply no arquivo de monitoring

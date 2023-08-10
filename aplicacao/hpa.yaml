@@ -1,0 +1,26 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: wordpress-hpa
+  namespace: deploy-ingress
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-wordpress  # Substitua pelo nome do seu Deployment do WordPress
+  minReplicas: 2  # Número mínimo de réplicas desejadas
+  maxReplicas: 6 # Número máximo de réplicas desejadas
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 20  # Porcentagem média de utilização de CPU desejada
+
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: 300Mi  # Valor médio de utilização de memória desejado

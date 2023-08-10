@@ -806,7 +806,7 @@ pdb:
 ## @param autoscaling.targetMemory Target Memory utilization percentage
 ##
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 2
   maxReplicas: 6
   targetCPU: 50

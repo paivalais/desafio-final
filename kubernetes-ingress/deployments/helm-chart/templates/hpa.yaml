@@ -6,7 +6,7 @@ metadata:
   namespace: deploy-ingress
 spec:
   maxReplicas: 6
-  minReplicas: 3
+  minReplicas: 2
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
