@@ -8,7 +8,7 @@
 
     #Ingress-controller
     - name: Criar a namespace deploy-ingress
-      shell: "kubectl apply -f namespace-ic.yaml"
+      shell: "kubectl create namespace deploy-ingress"
     
     - name: Instalar o Ingress-Controller
       shell: "helm install -f nginx-ingress/values.yaml my-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.17.1 -n deploy-ingress"
@@ -39,7 +39,7 @@
       shell: "helm install cert-manager jetstack/cert-manager -n cert-manager --version v1.11.0 --set installCRDs=true"
 
     - name: Rodar o apply no arquivo do certificado
-      shell: "kubectl apply -f clusterissuer-staging.yaml"
+      shell: "kubectl apply -f clusterissuer.yaml"
 
     #Wordpress
     - name: Instalar o Wordpress
